@@ -19,15 +19,16 @@ interface IHelloProps {
 export const testContext = React.createContext<any>(null);
 
 const App: React.FC<IHelloProps> = ({ sp }) => {
-  const addItemToList = async (listTitle: string, item: any) => {
+
+  const addItemToList = async (listTitle: string, item: IFAQ) => {
     try {
       const addedItem = await sp.web.lists
         .getByTitle(listTitle)
-        .items.add(item);
+        .items.add({Title:item.Title,Body:item.Body,Letter:item.Letter});
         alert("added to list")
       console.log("Item added successfully", addedItem);
     } catch (error) {
-      console.error("Error adding item to list", error);
+      console.error("Error adding item to list", (error as Error).message);
     }
   };
 

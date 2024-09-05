@@ -1,6 +1,6 @@
 import * as React from "react";
 import { testContext } from "./App";
-import { IFAQ } from "../../../Interfaces";
+// import { IFAQ } from "../../../Interfaces";
 // import { WebPartContext } from "@microsoft/sp-webpart-base";
 // interface IFAQAdd{
 
@@ -8,9 +8,7 @@ import { IFAQ } from "../../../Interfaces";
 
 const AddToList: React.FC = () => {
   const [choices, setChoices] = React.useState<string[]>([]);
-  const [data, setData] = React.useState<IFAQ>({
-    ID:0,
-    GUID: "",
+  const [data, setData] = React.useState({
     Title: "",
     Body: "",
     Letter: "",
