@@ -4,7 +4,7 @@ import "@pnp/sp/items";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as React from "react";
 import * as ReactDom from 'react-dom';
-import Hello from "./components/Hello"; // Assuming Hello is your React component
+import App from "./components/App"; // Assuming Hello is your React component
 
 export interface IHelloWebPartProps {
   description: string;
@@ -22,7 +22,7 @@ export default class HelloWebPart extends BaseClientSideWebPart<IHelloWebPartPro
 
   public render(): void {
     const element: React.ReactElement = React.createElement(
-      Hello,
+      App,
       { sp: this._sp }
     );
 

@@ -10,6 +10,7 @@ const Home: React.FC = () => {
         Parent
     </h1>
       <button onClick={() => navigete("/child")}>child</button>
+      <button onClick={() => navigete("/add")}>AddList</button>
     </>
   );
 };

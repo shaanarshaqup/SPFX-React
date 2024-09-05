@@ -1,6 +1,8 @@
 export interface IFAQ{
-    Id:number,
+    ID:number
+    GUID:string,
     Title:string,
     Body:string,
-    Letter:string
+    Letter:string,
+    isEdit:boolean
 }
