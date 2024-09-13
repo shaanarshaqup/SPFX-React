@@ -11,6 +11,7 @@ import Child from "./Child";
 import AddToList from "./AddToList";
 import { IFAQ } from "../../../Interfaces";
 // import { IFAQ } from '../../../Interfaces';
+import hsgdj from "./App.module.scss"
 
 interface IHelloProps {
   sp: ReturnType<typeof spfi>;
@@ -81,6 +82,7 @@ const App: React.FC<IHelloProps> = ({ sp }) => {
   return (
     <Router>
       <div style={{ height: "100vh" ,overflow:"auto"}}>
+        <span className={hsgdj.someClassName}></span>
         <h1 style={{ color: "green" }}>FAQ List</h1>
         {/* <button onClick={()=>navigate("/child")}>bhxzjczb</button> */}
         <Link to={"/"}>Hi</Link>
