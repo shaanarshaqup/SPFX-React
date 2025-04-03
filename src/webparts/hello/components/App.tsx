@@ -5,13 +5,12 @@ import "@pnp/sp/items";
 import "@pnp/sp/webs";
 import "@pnp/sp/sites";
 import "@pnp/sp/fields";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Home from "./Home";
 import Child from "./Child";
 import AddToList from "./AddToList";
 import { IFAQ } from "../../../Interfaces";
 // import { IFAQ } from '../../../Interfaces';
-import hsgdj from "./App.module.scss"
 
 interface IHelloProps {
   sp: ReturnType<typeof spfi>;
@@ -25,15 +24,15 @@ const App: React.FC<IHelloProps> = ({ sp }) => {
     try {
       const addedItem = await sp.web.lists
         .getByTitle(listTitle)
-        .items.add({Title:item.Title,Body:item.Body,Letter:item.Letter});
-        alert("added to list")
+        .items.add({ Title: item.Title, Body: item.Body, Letter: item.Letter });
+      alert("added to list")
       console.log("Item added successfully", addedItem);
     } catch (error) {
       console.error("Error adding item to list", (error as Error).message);
     }
   };
 
-  async function getChoiceOptions(listName:string,listColumn:string) {
+  async function getChoiceOptions(listName: string, listColumn: string) {
     try {
       const field = await sp.web.lists.getByTitle(listName).fields.getByTitle(listColumn)();
       const choices = field.Choices;
@@ -48,13 +47,13 @@ const App: React.FC<IHelloProps> = ({ sp }) => {
     try {
       console.log("................................");
       console.log(data);
-  
+
       if (data.isEdit === true) {
         // Ensure 'Title' field is correctly spelled
         await sp.web.lists.getByTitle('FAQ').items.getById(data.ID).update({
           Title: data.Title,
-          Body:data.Body,
-          Letter:data.Letter
+          Body: data.Body,
+          Letter: data.Letter
         });
       }
     } catch (err) {
@@ -62,7 +61,7 @@ const App: React.FC<IHelloProps> = ({ sp }) => {
     }
   };
 
-  // const navigate = useNavigate();
+   // const navigate = useNavigate();
   // const [items, setItems] = React.useState<IFAQ[]>([]);
 
   // React.useEffect(() => {
@@ -79,16 +78,33 @@ const App: React.FC<IHelloProps> = ({ sp }) => {
   //   fetchItems();
   // }, [sp]);
 
+  React.useEffect(() => {
+    const style = document.createElement("style");
+    style.innerHTML = `
+    #O365_NavHeader, #SuiteNavPlaceHolder, 
+    #spSiteHeader, .ms-HubNav, 
+    .ms-compositeHeader, #spSiteFooter {
+      display: none !important;
+    }
+      
+    *{
+    margin:0;
+    padding:0;
+    }
+  `;
+    document.head.appendChild(style);
+  }, [])
+
   return (
     <Router>
-      <div style={{ height: "100vh" ,overflow:"auto"}}>
-        <span className={hsgdj.someClassName}></span>
+      <div style={{ height: "100vh", overflow: "auto" }}>
+        <span></span>
         <h1 style={{ color: "green" }}>FAQ List</h1>
         {/* <button onClick={()=>navigate("/child")}>bhxzjczb</button> */}
         <Link to={"/"}>Hi</Link>
-        <testContext.Provider value={{ addItemToList ,getChoiceOptions,UpdateData}}>
+        <testContext.Provider value={{ addItemToList, getChoiceOptions, UpdateData }}>
           <Routes>
-            <Route path="" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/child" element={<Child sp={sp} />} />
             <Route path="/add" element={<AddToList />} />
           </Routes>
